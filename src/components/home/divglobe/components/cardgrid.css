@@ -1,0 +1,22 @@
+.my-box {
+  flex: 0 0 calc(30% - 20px);
+  margin: 10px;
+  background-color: var(--pricolorthick);
+  color: white;
+  border-radius: 8px;
+  text-align: center;
+  padding: 20px;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  transition: background 0.8s ease
+}
+.my-box:hover {
+    background: var(--pricolorlight)
+}
+@media (max-width: 700px) {
+    .my-box {
+        flex: 0 0 calc(50% - 20px);
+    }
+}

@@ -1,0 +1,89 @@
+.phone-text {
+    display: flex;
+    flex-direction: row-reverse;
+    width: 100%;
+    padding: 0px 20px;
+}
+.phone img {
+    width: 400px;
+    height: 500px;
+}
+
+.p-text  {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.text-1 {
+    display: flex;
+    align-items: center;
+    height: 50px;
+    gap: 20px;
+}
+.text-1 > * {
+    height: fit-content
+}
+.text-1 > div:nth-child(1) {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.text-1 > div:nth-child(2) {
+    width: 2px;
+    height: 40px;
+    background: black;
+}
+.text-1 > div:nth-child(3) {
+    
+}
+
+.text-2 {
+    font-weight: 600px;
+    font-size: 34px;
+}
+.text-3 {
+    font-size: 20px;
+}
+
+.text-4 > div {
+    display: block;
+    padding-bottom: 20px;
+    font-size: 18px;
+}
+.text-4 > div > p {
+    margin: 0;
+    padding: 0;
+}
+
+.text-btn {
+    display: flex;
+    gap: 30px;
+}
+.text-btn > button {
+    border: none;
+    border-radius: 20px;
+    font-size: 16px
+}
+.text-btn > button:nth-child(1) {
+    padding: 10px 20px;
+    color: white;
+    background: var(--pricolor);
+    
+}
+.text-btn > button:nth-child(1):hover {
+    background: var(--pricolorlight)
+}
+.text-btn > button:nth-child(2) {
+    padding: 10px 20px;
+    background: white;
+    
+}
+@media (max-width: 700px) {
+    .phone-text {
+        display: block
+    }
+    .phone {
+        display: flex;
+        justify-content: center;
+    }
+}

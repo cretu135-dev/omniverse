@@ -1,0 +1,24 @@
+.c-t {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    padding-bottom: 10px
+}
+.c-t > div:nth-child(2) {
+    font-weight: 700;
+    font-size: 50px;
+    color: #312e35;
+}
+.connect-top {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background: white;
+    box-shadow: 0px 8px 50px 0px rgb(43, 0, 78);
+}
+
+.connect-top img {
+    width: 100px;
+    height: 100px
+}

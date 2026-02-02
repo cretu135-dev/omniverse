@@ -1,0 +1,33 @@
+.header-coins {
+  background: #000;
+  color: #fff;
+  overflow: hidden;
+  width: 100%;
+  padding: 0px 0;
+  justify-self: flex-start;
+}
+
+.ticker-wrap {
+  display: flex;
+  width: 100%;
+}
+
+.ticker-move {
+  display: flex;
+  animation: ticker 20s linear infinite;
+}
+
+.ticker-item {
+  margin: 0 30px;
+  font-size: 16px;
+  white-space: nowrap;
+}
+
+@keyframes ticker {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
