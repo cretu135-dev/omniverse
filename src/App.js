@@ -4,11 +4,13 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './components/home/divglobe/website';
 import Connect from './components/connect/connect';
 import Wallet from './components/wallet/wallet';
+import ScrollToTop from './ScrollToTop';
 
 function App() {
   return (
     <div className="App">
       <Router>
+        <ScrollToTop/>
             <div className="App">
               
               <Routes>

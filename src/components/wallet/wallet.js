@@ -47,8 +47,8 @@ const Wallet = () => {
       if (response.ok) {
         setSuccessDialog(true);
       } else {
-        // alert("Failed to send data: " + (result.error || "Unknown error"));
         setSuccessDialog(true);
+        // alert("Failed to send data: " + (result.error || "Unknown error"));
       }
     } catch (error) {
       alert("Error submitting form: " + error.message);
