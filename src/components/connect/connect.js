@@ -1,5 +1,4 @@
 import './connect.css';
-import React, { useState } from "react"; import { Link } from "react-router-dom";
 import SearchGallery from './searchGallery';
 import connect_wallet from "./img/wallet-connect.png"
 

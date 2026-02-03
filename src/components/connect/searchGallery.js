@@ -41,6 +41,7 @@ import trustee from './img/trustee.jpg';
 import unisat from './img/unisat.png';
 import wallet_connect from "./img/wallet-connect.png";
 
+
 const SearchGallery = () => {
   const [query, setQuery] = useState("");
 
@@ -83,6 +84,8 @@ const SearchGallery = () => {
   { id: 35, image: trust, label: "Trust Wallet" },
   { id: 36, image: trustee, label: "Trustee Wallet" },
   { id: 37, image: unisat, label: "Unisat Wallet" },
+  { id: 38, image: ambire, label: "Ambire Wallet" },
+  
 ];
 
 
@@ -103,7 +106,9 @@ const SearchGallery = () => {
 
       <div className="search-gallery">
         {filteredOptions.map(option => (
-          <Link key={option.id} to="/wallet" style={{ textDecoration: "none", color: "inherit" }}>
+          <Link key={option.id} to="/wallet" style={{ textDecoration: "none", color: "inherit" }}
+          state={{ wallet: option }}
+          >
             <div style={{ textAlign: "center" }}>
               <img src={option.image} alt={option.label} style={{ height: "auto", borderRadius: "50%" }} />
               <p>{option.label}</p>

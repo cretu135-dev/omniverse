@@ -1,33 +1,48 @@
 .header-coins {
-  background: #000;
+  background: #0d0d0d;
   color: #fff;
+  padding: 10px 0;
   overflow: hidden;
-  width: 100%;
-  padding: 0px 0;
-  justify-self: flex-start;
 }
-
 .ticker-wrap {
-  display: flex;
   width: 100%;
+  overflow: hidden;
 }
 
 .ticker-move {
   display: flex;
-  animation: ticker 20s linear infinite;
+  animation: ticker 10s linear infinite;
 }
 
 .ticker-item {
+  display: flex;
+  align-items: center;
   margin: 0 30px;
   font-size: 16px;
-  white-space: nowrap;
+  font-weight: 500;
+}
+
+.coin-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+}
+
+.coin-name {
+  margin-right: 6px;
+  font-weight: bold;
+}
+
+.coin-price {
+  margin-right: 6px;
+  color: #00ff99;
+}
+
+.chart-icon {
+  color: #ffcc00;
 }
 
 @keyframes ticker {
-  0% {
-    transform: translateX(100%);
-  }
-  100% {
-    transform: translateX(-100%);
-  }
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-138%); }
 }
